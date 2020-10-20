@@ -32,4 +32,15 @@ public class Order {
                 '}';
     }
 
+    int totalPrice() {
+
+        int sum = this.meals.stream().mapToInt(meal -> meal.getPrice()).sum();
+
+        if(sum<0) {
+            throw new IllegalStateException("Price limit exceeded");
+        }
+
+        return sum;
+    }
+
 }
