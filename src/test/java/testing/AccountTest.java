@@ -14,7 +14,7 @@ public class AccountTest {
         Account newAccount = new Account();
 
         //then
-        assertFalse(newAccount.isActive(), "Check if account is not active");
+        assertFalse(newAccount.isActive());
     }
 
     @Test
@@ -29,5 +29,4 @@ public class AccountTest {
         //then
         assertTrue(newAccount.isActive());
     }
-
 }
