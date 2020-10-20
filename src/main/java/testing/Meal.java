@@ -1,6 +1,7 @@
 package testing;
 
 public class Meal {
+
     private int price;
     private String name;
 
@@ -13,11 +14,16 @@ public class Meal {
         this.name = name;
     }
 
-    public int getPrice() {
+    int getPrice() {
         return price;
     }
 
     int getDiscountedPrice(int discount) {
+
+        if(discount > this.price) {
+            throw new IllegalArgumentException("Discount cannot be higher than the price!");
+        }
+
         return this.price - discount;
     }
 
@@ -38,4 +44,5 @@ public class Meal {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+
 }
