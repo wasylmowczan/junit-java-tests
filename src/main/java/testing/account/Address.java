@@ -1,6 +1,6 @@
-package testing;
+package testing.account;
 
-public class Address {
+class Address {
 
     private String street;
     private String number;
@@ -9,4 +9,5 @@ public class Address {
         this.street = street;
         this.number = number;
     }
+
 }

@@ -1,13 +1,15 @@
 package testing;
 
+import testing.order.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
+class Cart {
 
     private List<Order> orders = new ArrayList<>();
 
-    public List<Order> getOrders() {
+    List<Order> getOrders() {
         return orders;
     }
 
@@ -33,4 +35,3 @@ public class Cart {
     }
 
 }
-
