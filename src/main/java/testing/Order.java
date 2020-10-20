@@ -3,7 +3,7 @@ package testing;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+class Order {
 
     private List<Meal> meals = new ArrayList<>();
 
@@ -18,4 +18,9 @@ public class Order {
     List<Meal> getMeals() {
         return meals;
     }
+
+    void cancel() {
+        this.meals.clear();
+    }
+
 }
