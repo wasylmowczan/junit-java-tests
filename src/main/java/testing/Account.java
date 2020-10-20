@@ -5,23 +5,23 @@ public class Account {
     private boolean active;
     private Address defaultDeliveryAddress;
 
-    public Account() {
+    Account() {
         this.active = false;
     }
 
-    public void activate() {
-        this.active= true;
+    void activate() {
+        this.active = true;
     }
 
-    public boolean isActive() {
+    boolean isActive() {
         return this.active;
     }
 
-    Address getDefaultDeliveryAddress() {
+    public Address getDefaultDeliveryAddress() {
         return defaultDeliveryAddress;
     }
 
-    void setDefaultDeliveryAddress(Address defaultDeliveryAddress) {
+    public void setDefaultDeliveryAddress(Address defaultDeliveryAddress) {
         this.defaultDeliveryAddress = defaultDeliveryAddress;
     }
 

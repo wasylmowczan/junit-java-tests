@@ -3,32 +3,38 @@ package testing;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
 
     @Test
     void newlyCreatedAccountShouldNotBeActive() {
+
         //given
-        //when
         Account newAccount = new Account();
 
         //then
         assertFalse(newAccount.isActive());
+        assertThat(newAccount.isActive(), equalTo(false));
+        assertThat(newAccount.isActive(), is(false));
+
     }
 
     @Test
     void activatedAccountShouldHaveActiveFlagSet() {
+
         //given
         Account newAccount = new Account();
-        assertFalse(newAccount.isActive());
 
         //when
         newAccount.activate();
 
         //then
         assertTrue(newAccount.isActive());
+        assertThat(newAccount.isActive(), equalTo(true));
+
     }
 
     @Test
@@ -43,5 +49,23 @@ public class AccountTest {
         //then
         assertNull(address);
         assertThat(address, nullValue());
+
+    }
+
+    @Test
+    void defaultDeliveryAddressShouldNotBeNullAfterBeingSet() {
+
+        //given
+        Address address = new Address("Krakowska", "67c");
+        Account account = new Account();
+        account.setDefaultDeliveryAddress(address);
+
+        //when
+        Address defaultAddress = account.getDefaultDeliveryAddress();
+
+        //then
+        assertNotNull(defaultAddress);
+        assertThat(defaultAddress, is(notNullValue()));
+
     }
 }
