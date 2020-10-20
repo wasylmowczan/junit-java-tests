@@ -43,6 +43,5 @@ public class AccountTest {
         //then
         assertNull(address);
         assertThat(address, nullValue());
-
     }
 }
