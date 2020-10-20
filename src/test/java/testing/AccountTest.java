@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AccountTest {
 
     @Test
-    void myTest() {
+    void newlyCreatedAccountShouldNotBeActive() {
         //given
         //when
         Account newAccount = new Account();
@@ -18,7 +18,7 @@ public class AccountTest {
     }
 
     @Test
-    void myTest2() {
+    void activatedAccountShouldHaveActiveFlagSet() {
         //given
         Account newAccount = new Account();
         assertFalse(newAccount.isActive());
