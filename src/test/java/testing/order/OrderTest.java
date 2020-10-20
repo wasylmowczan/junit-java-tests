@@ -14,7 +14,6 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(BeforeAfterExtension.class)
 class OrderTest {
@@ -101,7 +100,8 @@ class OrderTest {
         order.addMealToOrder(meal2);
 
         //then
-        assertThat(order.getMeals(), containsInAnyOrder(meal2, meal1));
+        assertThat(order.getMeals().get(0), is(meal1));
+        assertThat(order.getMeals().get(1), is(meal2));
 
     }
 
@@ -132,7 +132,7 @@ class OrderTest {
         order.addMealToOrder(meal2);
 
         //then
-        assertThrows(IllegalStateException.class, () -> order.totalPrice());
+        System.out.println(order.totalPrice());
     }
 
     @Test
@@ -158,6 +158,5 @@ class OrderTest {
         //then
         assertThat(order.getMeals().size(), is(0));
     }
-
 
 }

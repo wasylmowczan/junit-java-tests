@@ -23,7 +23,7 @@ class OrderBackup {
 
     void closeFile() throws IOException {
 
-        if(writer==null) {
+        if(writer == null) {
             throw new IOException("Backup file not created");
         }
 
