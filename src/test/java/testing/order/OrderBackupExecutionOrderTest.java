@@ -17,7 +17,6 @@ public class OrderBackupExecutionOrderTest {
         //then
         assertThrows(IOException.class, ()->orderBackup.backupOrder(new Order()));
 
-
     }
 
 }

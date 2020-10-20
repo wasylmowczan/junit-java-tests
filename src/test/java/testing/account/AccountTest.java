@@ -98,4 +98,17 @@ class AccountTest {
 
     }
 
+    @Test
+    void validEmailShouldBeSet() {
+        //given
+        Account account = new Account();
+
+        //when
+        account.setEmail("kontakt@devfoundry.pl");
+
+        //then
+        assertThat(account.getEmail(), is("kontakt@devfoundry.pl"));
+    }
+
+
 }
