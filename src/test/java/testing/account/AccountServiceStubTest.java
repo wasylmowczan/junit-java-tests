@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
 @MockitoSettings(strictness = Strictness.STRICT_STUBS)
-class AccountServiceTest {
+class AccountServiceStubTest {
 
     @Test
     void getAllActiveAccounts() {
