@@ -1,6 +1,7 @@
 package testing.Cart;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import testing.order.Order;
 import testing.order.OrderStatus;
@@ -153,5 +154,30 @@ class CartServiceTest {
 
     }
 
+    @Test
+    void processCartShouldSendToPrepareWithArgumentCaptor() {
 
+        //given
+        Order order = new Order();
+        Cart cart = new Cart();
+        cart.addOrderToCart(order);
+
+        CartHandler cartHandler = mock(CartHandler.class);
+        CartService cartService = new CartService(cartHandler);
+
+        ArgumentCaptor<Cart> argumentCaptor = ArgumentCaptor.forClass(Cart.class);
+
+        given(cartHandler.canHandleCart(cart)).willReturn(true);
+
+        //when
+        Cart resultCart = cartService.processCart(cart);
+
+        //then
+        then(cartHandler).should().sendToPrepare(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue().getOrders().size(), equalTo(1));
+
+        assertThat(resultCart.getOrders(), hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(), equalTo(OrderStatus.PREPARING));
+
+    }
 }
