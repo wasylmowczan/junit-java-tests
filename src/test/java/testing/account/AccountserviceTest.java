@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-@MockitoSettings(strictness = Strictness.STRICT_STUBS)
+@MockitoSettings(strictness = Strictness.STRICT_STUBS )
 public class AccountserviceTest {
 
     @Test
