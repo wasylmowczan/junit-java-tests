@@ -1,8 +1,11 @@
 package testing.Cart;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import testing.order.Order;
 import testing.order.OrderStatus;
 
@@ -14,7 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.inOrder;
 
+@MockitoSettings(strictness = Strictness.STRICT_STUBS)
+@ExtendWith(MockitoExtension.class)
 class CartServiceTest {
+
+    @InjectMocks
+    private CartService cartService;
+    @Mock
+    private CartHandler cartHandler;
+    @Captor
+    private ArgumentCaptor<Cart> argumentCaptor;
 
     @Test
     void processCartShouldSendToPrepare() {
@@ -23,9 +35,6 @@ class CartServiceTest {
         Order order = new Order();
         Cart cart = new Cart();
         cart.addOrderToCart(order);
-
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
 
         given(cartHandler.canHandleCart(cart)).willReturn(true);
 
@@ -56,9 +65,6 @@ class CartServiceTest {
         Cart cart = new Cart();
         cart.addOrderToCart(order);
 
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
-
         given(cartHandler.canHandleCart(cart)).willReturn(false);
 
         //when
@@ -78,9 +84,6 @@ class CartServiceTest {
         Order order = new Order();
         Cart cart = new Cart();
         cart.addOrderToCart(order);
-
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
 
         given(cartHandler.canHandleCart(cart)).willReturn(false);
 
@@ -121,9 +124,6 @@ class CartServiceTest {
         Cart cart = new Cart();
         cart.addOrderToCart(order);
 
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
-
         given(cartHandler.canHandleCart(argThat(c -> c.getOrders().size() > 0))).willReturn(true);
 
         //when
@@ -144,9 +144,6 @@ class CartServiceTest {
         Cart cart = new Cart();
         cart.addOrderToCart(order);
 
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
-
         given(cartHandler.canHandleCart(cart)).willThrow(IllegalStateException.class);
 
         //when
@@ -162,11 +159,6 @@ class CartServiceTest {
         Order order = new Order();
         Cart cart = new Cart();
         cart.addOrderToCart(order);
-
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
-
-        ArgumentCaptor<Cart> argumentCaptor = ArgumentCaptor.forClass(Cart.class);
 
         given(cartHandler.canHandleCart(cart)).willReturn(true);
 
@@ -189,9 +181,6 @@ class CartServiceTest {
         Order order = new Order();
         Cart cart = new Cart();
         cart.addOrderToCart(order);
-
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
 
         given(cartHandler.canHandleCart(cart)).willReturn(true);
 
@@ -216,9 +205,6 @@ class CartServiceTest {
         Order order = new Order();
         Cart cart = new Cart();
         cart.addOrderToCart(order);
-
-        CartHandler cartHandler = mock(CartHandler.class);
-        CartService cartService = new CartService(cartHandler);
 
 /*        doAnswer(invocationOnMock -> {
             Cart argumentCart = invocationOnMock.getArgument(0);
@@ -263,7 +249,6 @@ class CartServiceTest {
         cart.addOrderToCart(new Order());
         cart.addOrderToCart(new Order());
 
-        CartHandler cartHandler = mock(CartHandler.class);
         //doCallRealMethod().when(cartHandler).isDeliveryFree(cart);
         given(cartHandler.isDeliveryFree(cart)).willCallRealMethod();
 
